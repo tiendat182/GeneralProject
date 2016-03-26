@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="angular.min.js"></script>
+	<title>Lorem ipsum dolor sit.</title>
+	<style type="text/css">
+		 body {
+		    height: 100%;
+		}
+
+		html {
+		    display: table;
+		    margin: auto;
+		}
+
+		body {
+		    display: table-cell;
+		    vertical-align: middle;
+		}
+
+		.name {
+			color: Red;
+		}
+
+		table, td, th {
+			border: 1px solid grey;
+			border-collapse : collapse;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		tr:hover {
+			background-color:RGB(192,192,192);
+		}
+	</style>
+	<script>
+		angular.module("firstApp",[])
+		.controller("myController", function($scope){
+			$scope.label={};
+			$scope.label.angular="AngularJS";
+		});
+	</script>
+</head>
+<body ng-app="firstApp" ng-init="listCountry=[{locale:'en-VIE', name:'Viet Nam'},
+						{locale:'en-GE',name:'Germany'},
+						{locale:'en-AM',name:'American'}];
+				amountAsset=40;
+				listNick=[{no:'1',email:'datlt@yahoo.com'},
+					{no:'2',email:'datlt10@facebook.com'},
+					{no:'3',email:'tien-dat@fet.hut.edu.vn'}];">
+	<!--Directive, Expression Angular-->
+	<div ng-controller="myController">
+		<h2>This is the first application {{label.angular}} from Dat Luu-Tien</h2>
+		<p>Enter your name : <input type="text" ng-model="name"/></p>
+		<p>Welcome to <span ng-bind="name" class="name"></span> !</p>
+		<p>Your asset is : {{amountAsset*1000}}.000 VND</p>
+		<ol>
+			<li ng-repeat="country in listCountry">
+				{{ 'Country : ' + country.name + ', Locale : ' + country.locale }}
+			</li>
+		</ol>
+	
+		<table>
+			<thead>
+				<th>No.</th>
+				<th>Nick name</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="nick in listNick">
+					<td>{{nick.no}}</td>
+					<td>{{nick.email}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!Controller Angular-->
+</body>
+</html>
