@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter in AngularJS</title>
+	<script src="angular.min.js"></script>
+	<style type="text/css">
+		 body {
+		    height: 100%;
+		}
+
+		html {
+		    display: table;
+		    margin: auto;
+		}
+
+		body {
+		    display: table-cell;
+		    vertical-align: middle;
+		}
+
+		.name {
+			color: Red;
+		}
+
+/*		table, td, th {
+			border: 1px solid grey;
+			border-collapse : collapse;
+		}*/
+
+		table {
+			width: 100%;
+		}
+
+/*		tr:hover {
+			background-color:RGB(192,192,192);
+		}*/
+	</style>
+	<script>
+		var appAngular = angular.module("appAngular",[]);
+		appAngular.controller("sinhVienController", function($scope){
+			$scope.sinhVien = {
+				ho : "Luu-Tien",
+				ten: "Dat",
+				hocPhi: 305,
+				tenMonHoc:[
+					{ten:'Toan cao cap', diemThi:6.5},
+					{ten:'Lich su Dang', diemThi:5.5},
+					{ten:'Hoa dai cuong', diemThi:8.0}
+				],
+				hoTen: function() {
+					var objSinhVien;
+					objSinhVien = $scope.sinhVien;
+					return objSinhVien.ho + ' ' + objSinhVien.ten; 
+				}
+			};
+		});
+	</script>
+</head>
+<body>
+	<h2>Filter in AngularJS</h2>
+	<div ng-app="appAngular" ng-controller="sinhVienController">
+		<table border="0">
+			<tr>
+				<td>Nhap ho : </td>
+				<td><input type="text" ng-module="sinhVien.ho"/></td>
+			</tr>
+			<tr>
+				<td>Nhap ten : </td>
+				<td><input type="text" ng-module="sinhVien.ten"/></td>
+			</tr>
+			<tr>
+				<td>Nhap hoc phi : </td>
+				<td><input type="text" ng-module="sinhVien.hocPhi"/></td>
+			</tr>
+			<tr>
+				<td>Nhap mon hoc : </td>
+				<td><input type="text" ng-module="sinhVien.tenMonHoc"/></td>
+			</tr><br/>					
+		</table>
+		<table border="0">
+			<tr>
+				<td>Ten chu hoa : </td>
+				<td>{{sinhVien.hoTen() | uppercase}}</td>
+			</tr>
+			<tr>
+				<td>Ten chu thuong : </td>
+				<td>{{sinhVien.hoTen() | lowercase}}</td>
+			</tr>
+			<tr>
+				<td>Hoc phi : </td>
+				<td>{{sinhVien.hocPhi | currency}}</td>
+			</tr>
+			<tr>
+				<td>Mon hoc : </td>
+				<td>
+					<ul>
+						<li ng-repeat="mon in sinhVien.tenMonHoc | filter:tenMonHoc | orderBy:'diemThi'">
+							{{mon.ten + ', diem thi: ' + mon.diemThi}}
+						</li>
+					</ul>
+				</td>
+			</tr>				
+		</table>		
+	</div>
+</body>
+</html>
