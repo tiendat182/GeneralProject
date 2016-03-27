@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form in AngularJS</title>
+	<script src="angular.min.js"></script>
+	<style>
+	table, th , td {
+	  border: 1px solid grey;
+	  border-collapse: collapse;
+	  padding: 5px;
+	}
+	table tr:nth-child(odd) {
+	  background-color: #f2f2f2;
+	}
+	table tr:nth-child(even) {
+	  background-color: #ffffff;
+	}
+	
+	html {
+	    display: table;
+	    margin: auto;
+	}
+	</style>
+	<script>
+		var appAngularJS = angular.module("appAngularJS", []);
+
+		appAngularJS.controller('sinhVienController', function($scope) {
+		   $scope.reset = function(){
+				$scope.Ho = "Luu-Tien";
+				$scope.Ten = "Dat";
+				$scope.email = "datlt10@gmail.com";
+		   }   
+		   $scope.reset();
+		});
+	</script>
+</head>
+<body>
+	<h2>Form in AngularJS</h2>
+	<div ng-app="appAngularJS" ng-controller="sinhVienController">
+		<form ten="sinhVienForm" novalidate>
+			<table border="0">
+				<tr>
+					<td>Nhap ho : </td>
+					<td><input type="text" ten="ho" ng-model="Ho" required/>
+						<span style="color:red;" ng-show="sinhVienForm.ho.$dirty && sinhVienForm.ho.$invalid">
+							<span ng-show="sinhVienForm.ho.$error.required">Ho la bat buoc.</span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Nhap ten : </td>
+					<td><input type="text" ten="ten" ng-model="Ten" required/>
+						<span style="color:red;" ng-show="sinhVienForm.ten.$dirty && sinhVienForm.ten.$invalid">
+							<span ng-show="sinhVienForm.ten.$error.required">Ten la bat buoc.</span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Nhap email : </td>
+					<td><input type="text" ten="email" ng-model="email"  length ="100" required/>
+						<span style="color:red;" ng-show="sinhVienForm.email.$dirty && sinhVienForm.email.$invalid">
+							<span ng-show="sinhVienForm.email.$error.required">Email la bat buoc.</span>
+							<span ng-show="sinhVienForm.email.$error.email">Email la khong hop le.</span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td><button ng-click="reset()">Reset</button></td>
+					<td><button ng-disable="sinhVienForm.ho.$dirty && sinhVienForm.ho.$invalid || 
+								sinhvienForm.ten.$dirty && sinhvienForm.ten.$invalid ||
+			  					sinhvienForm.email.$dirty && sinhvienForm.email.$invalid"
+			  			ng-click="submit()">Submit</button></td>
+				</tr>
+			</table>
+		</form>
+
+	</div>
+</body>
+</html>
